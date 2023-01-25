@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Student Found</title>
+</head>
+
+<body>
+    <style>
+        .card {
+            margin: 0 auto;
+            float: none;
+        }
+    </style>
+    <h2 class="text-center my-3">Student Found</h2>
+    <div class="container card my-4 ">
+        <div class="card-body">
+
+            <% for (let i=0; i < 1; i++) { %>
+                <h5 class="card-title">
+                    Name:
+                    <%= searchStudents[i].name %>
+                </h5>
+                <p class="card-text">
+                    Roll No:
+                    <%= searchStudents[i].roll %>
+                </p>
+                <p class="card-text">
+                    Department Code:
+                    <%= searchStudents[i].dept_code %>
+                </p>
+                <p class="card-text">
+                    Address:
+                    <%= searchStudents[i].address %>
+                </p>
+                <p class="card-text">
+                    Phone:
+                    <%= searchStudents[i].phone %>
+                </p>
+
+
+                <% } %>
+        </div>
+    </div>
+    <div class="container my-4" style="margin: 0 auto;float:none;padding: none;">
+
+        <a href="/search/update" class="link-light"><button class="btn btn-warning">Update This
+                Student</button></a>&nbsp;
+        <a href="/search/delete" class="link-light"><button class="btn btn-danger">Delete This Student</button></a>
+    </div>
+    <div class="container-fluid text-center my-4 mx-4" style="position:absolute;bottom:0;">
+        <a class="link-danger" href="/" style="text-decoration: none;"><button class="btn btn-warning">Index
+                page</button></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

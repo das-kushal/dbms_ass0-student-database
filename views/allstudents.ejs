@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>All Students</title>
+</head>
+
+<body>
+    <style>
+        .card {
+            margin: 0 auto;
+            float: none;
+        }
+
+        .card-text {
+            margin: 1px;
+        }
+    </style>
+    <h2 class="text-center my-2">All Students</h2>
+    <% var currentStudents=students.slice(0, 5); var currentIndex=0; %>
+
+        <div id="students-container" class="container-fluid  my-1 " style="height:80vh;overflow-y: scroll;">
+            <% currentStudents.forEach(function(student) { %>
+                <div class="student card">
+                    <div class="card-body">
+                        <h5 class="card-text">Name: <%= student.name %>
+                        </h5>
+                        <p class="card-title">Roll: <%= student.roll %>
+                        </p>
+                        <p class="card-text">Dept: <%= student.dept_code %>
+                        </p>
+                        <p class="card-text">Address: <%= student.address %>
+                        </p>
+                        <p class="card-text">Phone: <%= student.phone %>
+                        </p>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+
+        <div class="container-fluid text-center my-4 mx-4" style="position:absolute;bottom:0;">
+            <button id="prev" class="btn btn-primary">Prev</button>
+            <button id="next" class="btn btn-primary">Next</button>
+            <a class="link-danger" href="/" style="text-decoration: none;"><button class="btn btn-warning">Index
+                    page</button></a>
+        </div>
+
+
+        <script>
+            // // Handle next button click
+            // var currentIndex = 0
+            let students = '<%- JSON.stringify(students) %>'
+            students = JSON.parse(students)
+
+
+            let maxLen = students.length
+
+
+            let nextBtn = document.getElementById('next')
+            let prevBtn = document.getElementById('prev')
+
+
+            let studentsPerPage = 5;
+
+            // The current page
+            let currentPage = 1;
+
+            function display() {
+                document.getElementById("students-container").innerHTML = "";
+                let startIndex = (currentPage - 1) * studentsPerPage;
+                let endIndex = startIndex + studentsPerPage;
+
+                currentStudents = students.slice(startIndex, endIndex);
+                document.getElementById("students-container").innerHTML = "";
+                currentStudents.forEach(function (student) {
+                    document.getElementById("students-container").innerHTML += `
+                        <div class="student card my-1" style="width:70rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Name: ${student.name}</h5>
+                            <p class="card-text">Roll: ${student.roll}</p>
+                            <p class="card-text">Dept: ${student.dept_code}</p>
+                            <p class="card-text">Address: ${student.address}</p>
+                            <p class="card-text">Phone: ${student.phone}</p>
+                            </div>
+                        </div>`;
+                });
+
+                if (currentPage === 1) {
+                    console.log('prevBtn is disabled');
+                    prevBtn.disabled = true;
+                } else {
+                    prevBtn.disabled = false;
+                }
+
+                if (currentPage === Math.ceil(students.length / studentsPerPage)) {
+                    console.log('nextBtn is disabled');
+                    nextBtn.disabled = true;
+                } else {
+                    nextBtn.disabled = false;
+                }
+            }
+
+            display();
+
+            nextBtn.addEventListener("click", function () {
+                currentPage++;
+                display();
+            });
+            prevBtn.addEventListener("click", function () {
+                currentPage--;
+                display();
+            });
+
+        </script>
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</body>
+</body>
+
+</html>
