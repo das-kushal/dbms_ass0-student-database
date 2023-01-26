@@ -31,7 +31,6 @@ export const getStudentByRoll = async (roll) => {
 }
 
 
-
 export const createStudent = async (roll, dept_code, name, address, phone) => {
     const [result] = await pool.query(`
     insert into students (roll,dept_code,name,address,phone)
@@ -60,8 +59,6 @@ export const deleteStudent = async (roll) => {
     `, [roll])
     return result
 }
-
-
 
 
 
